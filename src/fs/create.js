@@ -1,11 +1,15 @@
-import fs from 'fs/promises'
+import fs from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const filePath = path.join(__dirname, './files/fresh.txt');
 
 export const create = async () => {
-    fs.writeFile('files/fresh.txt', 'I am fresh and young', {flag: 'wx'})
-        .then(() => console.log('Saved'))
+    fs.writeFile(filePath, 'I am fresh and young', { flag: 'wx' })
+        .then(() => console.log('Saved!'))
         .catch(() => {
-        throw new Error('FS operation failed')
-    });
-}
-await create()
-
+            throw new Error('FS operation failed');
+        });
+};
+create();
